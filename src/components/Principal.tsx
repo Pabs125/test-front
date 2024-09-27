@@ -4,8 +4,10 @@ import '../styles/Principal.css';
 interface Driver {
   id: number;
   name: string;
-  position: string;
+  position: number;
   team: string;
+  nationality: string;
+  points: number;
   imageUrl: string;
   teamLogo: string;
 }
@@ -13,46 +15,34 @@ interface Driver {
 export default function Principal() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
 
+  // Fetch the drivers data from the API
   useEffect(() => {
     fetch('http://localhost:5000/api/drivers')
-      .then((response) => response.json())
-      .then((data) => setDrivers(data))
-      .catch((error) => console.error('Error fetching data:', error));
+      .then(response => response.json())
+      .then(data => setDrivers(data))
+      .catch(error => console.error('Error fetching drivers:', error));
   }, []);
 
   return (
     <main className="main">
-      <aside className="aside">
-        <div className="race-description">
-          <h2>Resumen de la Carrera</h2>
-          <p>La carrera del Gran Premio de Pises Bajos se llevó a cabo el fin de semana pasado, donde los pilotos demostraron un desempeño impresionante. Aquí está el resumen de los primeros tres lugares:</p>
-        </div>
-        <div className="podium">
-          <h3>Resultados del Podio</h3>
-          <ul className="podium-list">
-            {drivers.map((driver) => (
-              <li key={driver.id}>
+      <section className="driver-cards">
+        <h2>Drivers</h2>
+        <div className="cards-container">
+          {drivers.length === 0 ? (
+            <p>Loading drivers...</p>
+          ) : (
+            drivers.map(driver => (
+              <div key={driver.id} className="card">
                 <img src={driver.imageUrl} alt={driver.name} className="driver-photo" />
-                <div className="driver-info">
-                  <span className="driver-name">{driver.position} {driver.name}</span>
-                  <img src={driver.teamLogo} alt={`${driver.team} Logo`} className="team-logo" />
+                <div className="card-info">
+                  <h3>{driver.position}. {driver.name}</h3>
+                  <p>{driver.team}</p>
+                  <p>{driver.nationality}</p>
+                  <img src={driver.teamLogo} alt={`${driver.team} logo`} className="team-logo" />
                 </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
-      <section className="principal">
-        <div className="video-container">
-          <h2>Highlights de la Carrera</h2>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/some-video-id"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+              </div>
+            ))
+          )}
         </div>
       </section>
     </main>
