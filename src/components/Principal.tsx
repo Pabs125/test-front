@@ -15,7 +15,7 @@ interface Driver {
 export default function Principal() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
 
-  // Fetch the drivers data from the API
+  //Consumo de api
   useEffect(() => {
     fetch('http://localhost:5000/api/drivers')
       .then(response => response.json())
