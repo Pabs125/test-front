@@ -1,61 +1,26 @@
-/* Main Content Styles */
-.main {
-  width: 98%;
-  max-width: 1200px;
-  margin: 20px auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 2%;
-  min-height: 80dvh;
-}
-
-.main .aside {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border-radius: 10px;
-  width: 25%;
-  padding: 20px;
-  background-color: #a5aaa6;
-  color: white;
-}
-
-.race-description {
-  margin-bottom: 20px;
-}
-
-.race-description h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.podium {
-  width: 100%;
-}
-
-.podium h3 {
-  font-size: 1.3em;
-  margin-bottom: 15px;
-}
-
 .podium-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .podium-list li {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .driver-photo {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .driver-info {
@@ -65,74 +30,10 @@
 
 .driver-name {
   font-size: 1.1em;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .team-logo {
   width: 40px;
   height: 40px;
-}
-
-/* Section Principal */
-.principal {
-  flex-grow: 1;  /* This allows the section to take up remaining space */
-  border-radius: 10px;
-  background-color: #a5aaa6;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.video-container {
-  width: 100%;
-  text-align: center;
-}
-
-.video-container h2 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-  color: white;
-}
-
-/* Header Styles */
-.header {
-  width: 98%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70px;
-  border-radius: 10px;
-  background-color: #a5aaa6;
-}
-
-.navbar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.logo {
-  height: 50px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-}
-
-.nav-links a:hover {
-  color: #fff;
-  opacity: 0.8;
 }

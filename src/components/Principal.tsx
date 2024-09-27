@@ -1,6 +1,25 @@
+import { useEffect, useState } from 'react';
 import '../styles/Principal.css';
 
+interface Driver {
+  id: number;
+  name: string;
+  position: string;
+  team: string;
+  imageUrl: string;
+  teamLogo: string;
+}
+
 export default function Principal() {
+  const [drivers, setDrivers] = useState<Driver[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/drivers')
+      .then((response) => response.json())
+      .then((data) => setDrivers(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
   return (
     <main className="main">
       <aside className="aside">
@@ -11,27 +30,15 @@ export default function Principal() {
         <div className="podium">
           <h3>Resultados del Podio</h3>
           <ul className="podium-list">
-            <li>
-              <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/norris" alt="Lando Norris" className="driver-photo" />
-              <div className="driver-info">
-                <span className="driver-name">1º Lando Norris</span>
-                <img src="https://cdn.inspireuplift.com/uploads/images/seller_products/29868/1702914923_McLarenPapayaLogo.png" alt="McLaren Logo" className="team-logo" />
-              </div>
-            </li>
-            <li>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Max_Verstappen_2017_Malaysia_3.jpg/640px-Max_Verstappen_2017_Malaysia_3.jpg" alt="Max Verstappen" className="driver-photo" />
-              <div className="driver-info">
-                <span className="driver-name">2º Max Verstappen</span>
-                <img src="https://brandlogo.org/wp-content/uploads/2024/04/Oracle-Red-Bull-Racing-Logo-300x300.png.webp" alt="Red Bull Logo" className="team-logo" />
-              </div>
-            </li>
-            <li>
-              <img src="https://cdn-7.motorsport.com/images/mgl/YMdm7R32/s8/charles-leclerc-ferrari.jpg" alt="Charles Leclerc" className="driver-photo" />
-              <div className="driver-info">
-                <span className="driver-name">3º Charles Leclerc</span>
-                <img src="https://logos-world.net/wp-content/uploads/2020/05/Ferrari-Emblem.png" alt="Ferrari Logo" className="team-logo" />
-              </div>
-            </li>
+            {drivers.map((driver) => (
+              <li key={driver.id}>
+                <img src={driver.imageUrl} alt={driver.name} className="driver-photo" />
+                <div className="driver-info">
+                  <span className="driver-name">{driver.position} {driver.name}</span>
+                  <img src={driver.teamLogo} alt={`${driver.team} Logo`} className="team-logo" />
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </aside>
@@ -41,9 +48,8 @@ export default function Principal() {
           <iframe
             width="100%"
             height="315"
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lasexta.com%2Fmotor%2Fnoticias%2Fpaises-bajos-2024-horarios-donde-ver-favoritos_2024072866a3cdc98ec9200001952733.html&psig=AOvVaw0teTvEqRP-th7M2OLuxOzu&ust=1724794991691000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLDSzZjQk4gDFQAAAAAdAAAAABAE"
+            src="https://www.youtube.com/embed/some-video-id"
             title="YouTube video player"
-            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
